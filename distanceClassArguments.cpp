@@ -14,14 +14,15 @@ class Distance{
 private:
     int feet;
     float inches;
+    static int count; //static... one variable per class NOT per member. Every object shares this
 public:
     //Contructor with no arguments //this is used if no parameters are used
     Distance(): feet(0), inches(0){
-        //empty body
+        count++;
     }
     //contructor with 2 arguments //this is used if parameters are put in
     Distance(int ft, float in): feet(ft), inches(in){
-        //empty body
+        count++;
     }
     float cm;
     void setDist(int f, float i){
@@ -37,25 +38,31 @@ public:
     void showDist(){          //display information
         cout <<"Feet "<<feet<<" and inches "<<inches<<endl;
     }
-    void add_Distance(Distance d1, Distance d2){
-        Distance add_dist_tome(Distance d1);
+    void add_Distance(Distance d1, Distance d2);
+
+    Distance add_dist_tome(Distance d1);
+    int getCount(){
+            return count;
     }
 };
+int Distance::count = 0;
 // Prototypes
 
 // Main Program Program
 int main(void) {
 //Create an instance
-    Distance d1;
+    Distance d1, d4;
     Distance d2(8,2);
     Distance d3(2,4);
     cout <<"\nd1 = ";
     d1.showDist();
+    cout<<"Count is " << d1.getCount()<<endl;
     cout <<"\nd2 = ";
     d2.showDist();
+    cout<<"Count is "<< d1.getCount()<<endl;
     cout <<"\nd3 = ";
     d3.showDist();
-    Distance d4.add_Distance(d2,d3);
+    d4.add_Distance(d2,d3);
     cout <<"\nd4 = ";
     d4.showDist();
     d4 = d4.add_dist_tome(d2);

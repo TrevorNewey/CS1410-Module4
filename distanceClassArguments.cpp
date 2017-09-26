@@ -15,6 +15,14 @@ private:
     int feet;
     float inches;
 public:
+    //Contructor with no arguments //this is used if no parameters are used
+    Distance(): feet(0), inches(0){
+        //empty body
+    }
+    //contructor with 2 arguments //this is used if parameters are put in
+    Distance(int ft, float in): feet(ft), inches(in){
+        //empty body
+    }
     float cm;
     void setDist(int f, float i){
         feet = f;
@@ -29,26 +37,39 @@ public:
     void showDist(){          //display information
         cout <<"Feet "<<feet<<" and inches "<<inches<<endl;
     }
+    void add_Distance(Distance d1, Distance d2){
+
+    }
 };
 // Prototypes
 
 // Main Program Program
 int main(void) {
 //Create an instance
-    Distance d1,d2;
-    //Use Methods to set/access data
-    d1.setDist(6,6.5);
-    cout <<"\nDist 1"<<endl;
+    Distance d1;
+    Distance d2(8,2);
+    Distance d3(2,4);
+    cout <<"\nd1 = ";
     d1.showDist();
-
-    d2.getDist();
-    cout <<"\nDist 2"<<endl;
+    cout <<"\nd2 = ";
     d2.showDist();
-
-    //access a public data member
-    d2.cm = 8.3;
-    cout <<"cm is "<< d2.cm<<endl;
+    cout <<"\nd3 = ";
+    d3.showDist();
+    cout <<"\nd4 = ";
+    Distance d4.add_Distance(d2,d3);
     return 0;
 }
 
 // Function Definitions
+//1. Declare prototype inside calss.
+//2. Definition is outside class
+//3. Use the scope resolution operator ::
+void Distance::add_Distance(Distance d1, Distance d2){//This belongs to the class. (Method for members only)  Classname::functionName
+    inches = d1.inches + d2.inches; //add inches
+    feet = 0;
+    if(inches >=12.0){
+        inches -= 12;            //check for extra foot
+        feet++;                  //add feet
+    }
+    feet += d1.feet + d2.feet;
+}
